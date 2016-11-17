@@ -1,0 +1,1055 @@
+@charset "UTF-8";
+
+///@author: fguizc
+
+
+
+/**
+ * [$keyColor description]
+ * hoverColor keyWord_defaultColor
+ */
+$keyColor: #e61e25;
+
+/**
+ * [$hd_Color description]
+ * headerColor_Txt_default
+ *
+ * hd-->header
+ * m-->main
+ * ft-->footer
+ * rec-->recommend
+ * pro-->productes
+ */
+$defaultColor: #333;
+$defaultWhiteColor: #fff;
+$hd_Color: #8d8d8d;
+$nav_Color: #878787;
+$m_recTitColor: #586a80;
+$m_probgColor: #f0f0f0;
+$m_proTitColor: #2c3e50;
+$m_proTxtColor: #9ea7b3;
+$m_proContentColor: #576a7f;
+$m_newsbgColor: #d0d0d0;
+$m_partnerColor: dimgrey;
+$m_cardShadowColor: #d8d8d8;
+$m_allPro_addRate: #721786;
+
+
+
+//defaultFont
+$defaultFont:  "Microsoft YaHei","微软雅黑",Tahoma,Helvetica !default;
+
+//===================================
+//responsive layout point
+//===================================
+$width-small:  420px;
+$width-medium: 768px;
+$width-large:  992px;
+$width-huge:   1200px;
+@mixin responsive($width) {
+    @if $width == huge-screens{
+        @media only screen and (min-width: $width-huge) { @content; }
+    }
+    @else if $width == wide-screens{
+        @media only screen and (min-width: $width-large)  { @content; }
+    }
+    @else if $width == medium-screens {
+        @media only screen and (min-width: $width-medium) { @content; }
+    }
+    @else if $width == small-screens {
+        @media only screen and (min-width: $width-small) { @content; }
+    }
+}
+
+
+/**
+ * FONTFACE
+ */
+ @mixin font-face($font-family,$file-path,$font-weight:normal,$font-style:normal,$asset-pipeline: false){
+         @font-face {
+             font: {
+                 family: $font-family;
+                 weight: $font-weight;
+                 style: $font-style;
+             }
+
+             @if $asset-pipeline == true {
+                 src: font-url("#{$file-path}.eot");
+                 src: font-url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+                      font-url("#{$file-path}.woff") format("woff"),
+                      font-url("#{$file-path}.ttf") format("truetype"),
+                      font-url("#{$file-path}.svg##{$font-family}") format("svg");
+             }
+             @else {
+                 src: url("#{$file-path}.eot");
+                 src: url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+                      url("#{$file-path}-webfont.woff") format("woff"),
+                      url("#{$file-path}.ttf") format("truetype"),
+                      url("#{$file-path}.svg##{$font-family}") format("svg");
+             }
+         }
+     }
+
+// @include font-face("MiFie","../css/fonts/wjs/MiFie-Web-Font",normal,$asset-pipeline:false);
+@include font-face("MiFie","http://ofw4b144k.bkt.clouddn.com/MiFie-Web-Font",normal,$asset-pipeline:false);
+
+
+$icons: (
+  "mobile_phone"        "\e908",
+  "angle_down"          "\e90c",
+  "phone_call"          "\e909",
+  "logo_pic"            "\e920",
+  "logo_txt"            "\e93e",
+  "cus_server"          "\e987",
+  "business_promise"    "\e907",
+  "platform_safe"       "\e903",
+  "money_safe"          "\e901",
+  "safe_promise"        "\e900",
+  "good_info"           "\e904",
+  "info_release"        "\e902",
+  "clock"               "\e906",
+  "video"               "\e905",
+  "notice"              "\e989",
+  "cfca"                "\e93b",
+  "qihoo"               "\e938",
+  "netchina"            "\e939",
+  "zx110"               "\e93c",
+  "uniE933"             "\e93a",
+  "uniE932"             "\e93d",
+  "uniE948"             "\e948",
+  //合作伙伴
+  "uniE930"             "\e946",
+  "uniE92F"             "\e92f",
+  "uniE92E"             "\e92e",
+  "uniE92A"             "\e92a",
+  "uniE929"             "\e929",
+  "uniE931"             "\e931",
+  "uniE92C"             "\e92c",
+  "uniE92B"             "\e92b",
+  //新闻
+  "allnews"             "\e90e",
+  "media_reports"       "\e90f",
+  "top_news"            "\e910",
+  "industry_info"       "\e911",
+  //SNS-ICON
+  "wechat"              "\e91a",
+  "weibo"               "\e91c",
+  "tweibo"              "\e91b",
+);
+
+@function match($haystack,$needle){
+    @each $item in $haystack {
+        $index:index($item,$needle);
+        @if $index {
+            $return: if($index == 1, 2, $index);
+            @return nth($item,$return);
+        }
+    }
+    @return false;
+}
+
+@mixin icon($position:"before",$styles:true,$icon:false){
+    //使用伪元素:before 或者:after，默认为:before
+    &:#{$position} {
+        @if $icon {
+            //图标已被指定
+            content: match($icons,$icon);
+        }
+        @if $styles {
+            //通过样式指定图标
+            font: {
+                family: "MiFie" !important;//@include font-face指定的字体名相同
+                style: normal;
+                weight: normal;
+                variant: normal;
+            }
+            text-transform: none;
+            speak: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+        }
+        //给伪元素添加其他的样式规则
+        @content;
+    }
+}
+
+i[class^=icon]{
+  @include icon ;
+  padding-right: 2px;
+  &:hover{text-decoration: none;}
+}
+
+
+.icon-mobile_phone{@include icon("before",false,"mobile_phone"){font-size: 12px};}
+.icon-angle_down{-webkit-transform: rotate(90deg);transform: rotate(90deg);@include icon("before",false,"angle_down"){font-size: 12px;};}
+.icon-phone_call{@include icon("before",false,"phone_call"){font-size: 12px};}
+.icon-logo_pic{@include icon("before",false,"logo_pic"){font-size: 50px;color: $keyColor};}
+.icon-logo_txt{@include icon("before",false,"logo_txt"){font-size: 40px;color: defaultColor;};}
+.icon-business_promise{@include icon("before",false,"business_promise"){font-size: 24px;}}
+.icon-platform_safe{@include icon("before",false,"platform_safe"){font-size: 24px;}}
+.icon-money_safe{@include icon("before",false,"money_safe"){font-size: 24px;}}
+.icon-safe_promise{@include icon("before",false,"safe_promise"){font-size: 24px;}}
+.icon-good_info{@include icon("before",false,"good_info"){font-size: 24px;}}
+.icon-info_release{@include icon("before",false,"info_release"){font-size: 24px;}}
+.icon-cus_server{@include icon("before",false,"cus_server"){font-size: 24px;}}
+.icon-clock{@include icon("before",false,"clock"){font-size: 20px;}}
+.icon-video{@include icon("before",false,"video"){font-size: 20px;}}
+.icon-notice{@include icon("before",false,"notice"){font-size: 20px;}}
+.icon-cfca{@include icon("before",false,"cfca"){font-size: 50px;color: #999}}
+.icon-qihoo{@include icon("before",false,"qihoo"){font-size: 50px;color: #999}}
+.icon-netchina{@include icon("before",false,"netchina"){font-size: 50px;color: #999}}
+.icon-zx110{@include icon("before",false,"zx110"){font-size: 50px;color: #999}}
+.icon-uniE933{@include icon("before",false,"uniE933"){font-size: 50px;color: #999}}
+.icon-uniE932{@include icon("before",false,"uniE932"){font-size: 50px;color: #999}}
+.icon-uniE948{@include icon("before",false,"uniE948"){font-size: 50px;color: #999}}
+//=================合作伙伴===============
+//银联支付
+.icon-uniE930{@include icon("before",false,"uniE930"){font-size: 83px;}}
+//中国人保
+.icon-uniE92F{@include icon("before",false,"uniE92F"){font-size: 83px;}}
+// THOMSON
+.icon-uniE92E{@include icon("before",false,"uniE92E"){font-size: 83px;}}
+//中国人寿
+.icon-uniE92A{@include icon("before",false,"uniE92A"){font-size: 83px;}}
+//上海资信
+.icon-uniE929{@include icon("before",false,"uniE929"){font-size: 83px;}}
+//中国金融认证中心
+.icon-uniE931{@include icon("before",false,"uniE931"){font-size: 83px;}}
+// 百度
+.icon-uniE92C{@include icon("before",false,"uniE92C"){font-size: 83px;}}
+// 360
+.icon-uniE92B{@include icon("before",false,"uniE92B"){font-size: 83px;}}
+
+//==================新闻部分图标==================
+.icon_allnews{@include icon("before",false,"allnews"){font-size: 30px;}}
+.icon_media_reports{@include icon("before",false,"media_reports"){font-size: 30px;}}
+.icon_top_news{@include icon("before",false,"top_news"){font-size: 30px;}}
+.icon_industry_info{@include icon("before",false,"industry_info"){font-size: 30px;}}
+//==================SNS-ICON==========================
+.icon-wechat{@include icon("before",false,"wechat"){font-size: 30px;}}
+.icon-weibo{@include icon("before",false,"weibo"){font-size: 30px;}}
+.icon-tweibo{@include icon("before",false,"tweibo"){font-size: 30px;}}
+
+@mixin overTxt {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;}
+
+@mixin flexCenter($direction) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;}
+
+@mixin hoverStyle($hoverColor) {
+  cursor: pointer;
+  background-color: $hoverColor;
+}
+
+
+
+
+  /* 设置复用或全局通用类 */
+  //清除浮动
+  .clearfix:after{content: '.';
+                  height: 0;
+                  clear: both;
+                  overflow: hidden;
+                  visibility: hidden;
+                  display: block;}
+  //关键字颜色 用于标识 热门|重点|打折 等信息
+  .hotkey{color: $keyColor}
+
+  //设置三个类用于右上角角标颜色 例如 京（location） 实/保 股/抵
+
+  body{margin: 0;padding: 0;
+       width: 100vw;
+       overflow-x: hidden;
+       font-family: $defaultFont}
+  ul{list-style: none;padding-left: 0;margin: 0 }
+  a{text-decoration: none;
+    color: $defaultColor}
+  /**
+   * =================================
+   * HEADER
+   * =================================
+   */
+  header{
+    width: 100vw;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid $hd_Color;
+    .hd_wrap{
+      width: 100%;
+      display: none;
+      @include responsive(medium-screens){
+        display: flex;
+      }
+      @include responsive(huge-screens){
+        width: 1080px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .hd_wrap{
+    @include flexCenter(row);
+    font-size: 12px;
+    color: $hd_Color;
+    >div:not(:last-child){border-right: 1px solid $hd_Color}
+    >div:nth-of-type(3){flex:1}
+    >div:nth-of-type(2){flex:2}
+  }
+  .hd_wrap_col1{
+    flex: 1;
+    @include responsive(medium-screens){
+      flex: .7;
+      text-align: center;
+    };
+    .col1_wrap{margin-left: 60px;
+      @include responsive(medium-screens){
+        margin-left: 0;
+      }}
+  }
+  .hd_wrap_col2{text-align: center;}
+  .hd_wrap_col3{
+    text-align: center;
+    :first-child{margin-right: 20px;}
+  }
+  .hd_wrap_col4{
+    font-size: 14px;
+    button{border: none;outline: none;
+           background-color: $keyColor;
+           color: #fff;
+           padding: 5px 15px;
+           margin: 0 10px 0 60px;
+           border-radius: 5px;
+           font-family: $defaultFont;
+         @include responsive(medium-screens){margin-left: 20px;}
+         &:hover{
+           @include hoverStyle(lighten($keyColor,10%));
+         }}
+  }
+
+  /**
+   * =================================
+   * HEADER_NAV
+   * =================================
+   */
+
+    .hd_nav{width: 100vw;
+      display: none;
+      @include responsive(medium-screens){
+        display: block;
+      };
+      &_wrap{
+        width: 100%;
+        @include flexCenter(row);
+        @include responsive(huge-screens){
+          width: 1080px;
+          margin: 0 auto;
+        }
+          >figure{margin: 0;padding: 0;@include flexCenter(row);flex:1}
+          >ul{@include flexCenter(row);flex:3;
+              margin: 0;padding: 0;
+              text-align: center;
+            >li{flex: 1;padding: 30px 0;
+              &:hover{padding-bottom: 28px;
+                      cursor: pointer;
+                      border-bottom: 2px solid $keyColor;}
+              &:hover>a{color: $defaultColor};
+              >a{font-size: 18px;color: $nav_Color;}}}
+          >span{flex:1;text-align: right;
+            >p{margin-right: 28px;font-size: 18px;color: $nav_Color}}
+      }}
+
+
+  /**
+   * ===============================
+   * MAIN
+   * ===============================
+   */
+   main{
+     >figure{margin: 0 auto;padding: 0;
+             width: 100vw;
+             max-height: 352px;
+             min-height: 171px;
+             position: relative;
+             overflow: hidden;
+             @include flexCenter(row);
+             @include responsive(huge-screens){
+               height: 352px;
+             };
+        >picture{
+          @include flexCenter(row);
+          width: 100%;
+          img{
+              width: 100%;
+              // @include responsive(small-screens){width: 100%;height: auto;}
+              @include responsive(medium-screens){height: 352px;width: auto;}
+              @include responsive(wide-screens){height: 352px;width: auto;}
+              @include responsive(huge-screens){height: 352px;width: auto;}
+            }
+         }
+      }
+     >.m_features{
+       width: 100%;
+       height: 215px;
+       padding: 30px 0 ;
+       box-sizing: border-box;
+       border-bottom: 1px solid #ccc;
+       display: none;
+       @include responsive(medium-screens){display: block;};
+       >.features_wrap{margin: 0 auto;padding: 0;
+           height: 100%;
+         display: flex;flex-direction: column;
+         @include responsive(huge-screens){width: 1080px;}
+         >.row{display: flex;justify-content: center;flex: 1;
+           >div{flex: 1;
+             a{@include flexCenter(row);justify-content: flex-start;width: 100%;height: 100%;
+               &:hover{color: $keyColor}
+               i{padding-left: 6vw;}
+               article{padding-left: 10px;
+                       display: flex;
+                       flex-direction: column;
+                       h2{margin: 0;
+                          font-size: 18px;
+                          font-weight: 300;
+                          }
+                       span{font-size: 14px;}
+                        }
+             }}}
+       }
+     }
+     >.m_ad_banner1{
+        // height: 60px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #ccc;
+        @include responsive(medium-screens){
+          height: 70px;
+        };
+        .ad_banner_warp{
+          // line-height: 69px;
+          padding-bottom: 20px;
+          font-size: 14px;
+          @include flexCenter(row);
+          text-align: center;
+          .left_notice{flex: 5;
+            .imm_buy{padding-bottom: 5px;border-bottom: 1px dashed $keyColor}}
+          .right_notice{flex: 3;
+            a:nth-of-type(2){padding-left: 40px;}}
+        }
+     }
+     >.m_ad_banner{
+       width: 100vw;
+       .ad_banner_warp{
+         width: 100%;
+         @include responsive(huge-screens){
+           width: 1080px;margin: 0 auto;
+         };
+         .left_notice{
+           padding: 10px 0 0 0;
+           line-height: 20px;
+           @include responsive(medium-screens){
+             padding: 0;
+             line-height: 69px;
+           };
+         }
+         .right_notice{
+           display: none;
+           @include responsive(wide-screens){
+             display: flex;
+             flex-direction: column;
+             line-height: 30px;
+           };
+           @include responsive(huge-screens){
+             display: block;
+             line-height: 69px;
+           };
+         }
+       }
+     }
+     >.m_recProducte{
+       width: 100%;
+       .m_recProducte_wrap{
+         width: 100%;
+         @include responsive(huge-screens){
+           width: 1140px;margin: 0 auto;
+         }
+         @include flexCenter(column);
+         .recProducte_title{flex: 2;
+                            margin: 0;
+                            padding: 40px 0;
+                            font-size: 24px;
+                            font-weight: 300;
+                            color: $m_recTitColor;
+                            @include flexCenter(row);}
+         .recProducte_items{
+                 flex: 6;
+         }
+       }
+     }
+     >.m_allProductes{
+       width: 100%;
+       padding: 40px 0;
+       border-bottom: 1px solid #ccc;
+       background-color: $m_probgColor;
+       >.allPro_wrap{
+         width: 100%;
+         @include responsive(huge-screens){
+           width: 1170px;
+           margin: 0 auto;
+         };
+         .m_pro_nav{@include flexCenter(row);
+          //  padding-bottom: 10px;
+           width:95%;
+           border-bottom: 1px solid #ccc;
+           text-align: center;
+           display: block;
+           white-space: nowrap;
+           margin: 0 auto;
+           overflow: auto;
+          //  &::-webkit-scrollbar {
+          //   background-color: rgba(255, 255, 255, 0);
+           //
+          //  }
+           @include responsive(small-screens){
+             display: flex;
+           };
+           li{flex: 1;text-align: center;
+              padding-bottom: 10px;box-sizing: border-box;
+              font-size: 12px;
+              display: inline-block;
+              @include responsive(small-screeens){
+                font-size: 16px;
+                display: list-item;
+              };
+              &:hover{
+                cursor: pointer;
+                padding-bottom: 6px;
+                border-bottom: 4px solid $keyColor;
+              }}}
+       }
+     }
+     >.m_news{
+          width: 100vw;
+          border-bottom: 1px solid #ccc;
+          margin-top: 30px;
+          .m_news_wrap{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+            box-sizing: border-box;
+            @include responsive(small-screens){
+              padding: 0 0 0 8% ;
+            };
+            @include responsive(wide-screens){
+              flex-direction: row;
+            };
+            @include responsive(huge-screens){
+              width: 1080px;margin: 0 auto;
+            };
+            .news_title{flex: 1.5;
+                        align-self: flex-start;
+                        padding-left: 0;
+                        margin-right: 20px;
+                        text-align: left;
+                        text-indent: 2em;
+                        width: 90%;
+                        @include responsive(wide-screens){
+                          width: 100%;
+                          text-indent: 0;
+                          padding-left: 50px;
+                          text-align: center;
+                        };
+              h4{margin-top: 0;padding-bottom: 10px;
+                 border-bottom: 1px solid #ccc;
+                 position: relative;
+                   &::after{content: '';
+                            display: block;
+                            position: absolute;
+                            right: -10px;
+                            bottom: -5px;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            border: 1px solid #ccc;
+                            }
+                }}
+            .news_icon{flex: 1;display: flex;align-items: center;}
+            .news_content{
+              flex: 8;
+              padding-left: 0;
+              margin-top: 15px;display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              @include responsive(small-screens){
+                padding-left: 40px;
+              };
+              ul>li{line-height: 2em;
+                    color: $defaultColor;
+                    font-size: 14px;
+                    margin-bottom: 15px;
+                    @include responsive(samll-screens){
+                      line-height: 3.5em;
+                    };
+                  &:hover{cursor: pointer;}}
+              ul:not(:first-child){display: none;}}
+          }}
+
+
+     >.m_partner{
+       width: 100%;
+       background-color: rgba(252,252,252,1);
+       border-bottom: 1px solid #ccc;
+       @include flexCenter(column);
+       display: none;
+       @include responsive(medium-screens){
+         display: flex;
+       };
+        ul{
+          width: 50%;
+          padding-left: 0;
+          @include flexCenter(row);
+          flex-wrap: wrap;
+          @include responsive(wide-screens){
+            width: 100%;
+            flex-wrap: nowrap;
+          };
+          @include responsive(huge-screens){
+            width: 1080px;
+            margin: 0 auto;
+          };
+          >li{flex: 1;text-align: center;
+              &:hover{cursor: pointer;}}
+          >li:nth-of-type(1){&:hover i::before{color: #df3232;}}
+          >li:nth-of-type(2){&:hover i::before{color: #e8380d;}}
+          >li:nth-of-type(3){&:hover i::before{color: #ed6f00;}}
+          >li:nth-of-type(4){&:hover i::before{color: #159f69;}}
+          >li:nth-of-type(5){&:hover i::before{color: #07569e;}}
+          >li:nth-of-type(6){&:hover i::before{color: #004098;}}
+          >li:nth-of-type(7){&:hover i::before{color: #d32019;}}
+          >li:nth-of-type(8){&:hover i::before{color: #3eac4a;}}
+        }}
+     >.m_aside_right{position: fixed;
+                     right: 0;top: 140px;
+                     width: 35px;height: 135px;
+                     font-weight:600;
+                     border-radius: 5px;
+                     background-color: $m_cardShadowColor;
+                     &:hover{background-color: $keyColor}
+                     display: none;
+                     @include responsive(medium-screens){display: block}
+      >a{display: inline-block;
+         text-align: center;
+         padding-top: 5px;
+         width: 100%;
+         height: 100%;
+         font-size: 18px;color: $defaultWhiteColor}}
+     >.m_backTop{position: fixed;bottom: 20px;
+                 right: 30px;
+                 width: 30px;height: 50px;
+                 background: url(../img/index.png) -86px 0 no-repeat;
+                 display: none;
+                 @include responsive(wide-screens){
+                   display: block;
+                 };
+                 &:hover{background-position: -39px 0;cursor: pointer;}}
+   }
+
+  //推荐商品展示卡片
+  .recProducte_items{padding-left: 0;width: 100%;
+    display: flex;flex-direction: row;
+    .item{
+      overflow: hidden;
+      flex: 1;
+      box-shadow: 3px 5px 1px 2px #ddd;
+      .item_title{
+        @include responsive(huge-screens){
+          height: 90px;
+          box-sizing: border-box;
+          padding: 10px 0;
+        }
+        position: relative;
+        .title_bg{background: url(../img/index.png) -243px -94px no-repeat;
+                  width: 240px;height: 94px;
+                  position: absolute;
+                  left: 0;top: 0;}
+        >p{margin: 0;padding-left: 20px;color: $defaultWhiteColor;}
+        >.title_short{font-size: 14px;margin-bottom: 15px;}
+        >.title_info{font-size: 12px;}
+        >.title_active{position: absolute;
+                       right: 0;top: -40px;
+                       width: 90px;height: 80px;
+                       background-color: $defaultWhiteColor;
+                       transform: rotate(45deg);
+          span{transform: rotate(-45deg) translateY(-9px);
+               position: absolute;right: 0;width: 35px;
+               top: 40px;font-size: 16px;text-shadow: 1px 1px #ccc;
+               color: $keyColor;font-weight: bold;} }
+
+      }
+      .item_content{
+        .content_info{}
+        .contnet_tags{}
+        .content_btnBuy{}
+      }
+    }
+    .rec_item1{background-color: $keyColor;margin-right: 60px;}
+    .rec_item2{background-color: #2681c5;}
+  }
+
+
+  //所有商品中的卡片样式
+  .m_pro_content{
+    margin-top: 20px;
+    width: 100%;
+    @include flexCenter(column);
+    .content_row{
+      // margin-bottom: 40px;
+    width: 95%;
+    @include flexCenter(column);
+    flex-wrap: wrap;
+    justify-content: initial;
+    @include responsive(medium-screens){
+      flex-direction: row;
+    };
+    @include responsive(wide-screens){
+      flex-wrap: nowrap;
+      justify-content: center;
+      width: 100%;
+    };
+    @media (min-width: 768px) and (max-width: 992px){
+      justify-content: space-between;
+    }
+    // @include responsive(huge-screens){
+    //   width: 100%;
+    // };
+      .item{
+        width: 100%;
+        flex: 1;
+        padding: 0 13px;
+        box-sizing: border-box;
+        background-color: $defaultWhiteColor;
+        background-clip: content-box;
+        margin-bottom: 20px;
+
+        @include responsive(wide-screens){
+          padding: 0 15px
+        };
+        @include responsive(medium-screens){
+          flex: none;
+          width: auto;
+        };
+        @media (min-width: 992px) and (max-width: 1200px){
+          flex: 1;
+          padding: 0 5px;
+        }
+        @media (min-width: 768px) and (max-width: 992px){
+          padding: 0 3px;
+        }
+        a{width: 100%;display: flex;
+          flex-direction: row;
+          box-shadow: 3px 3px 8px 2px #ccc;
+          .left_part{
+            flex: 1;
+          }
+          //卡片上下两个缺口
+          .right_part{
+            padding: 0 10px 0 15px;
+            position: relative;
+            &::after,&::before{
+              width: 15px;
+              height: 15px;
+              border-radius: 50%;
+              background-color: $m_probgColor;
+              content: '';
+              position: absolute;
+              z-index: 100;
+              left: 0;
+              transform: translateY(50%);
+            }
+            &::after{
+              bottom: 0;
+              box-shadow: 0 8px 8px 1px #ccc inset
+            }
+            &::before{
+              top: 0;
+              transform: translateY(-50%);
+            }
+            }
+          }
+      }
+    }
+  }
+
+  //卡片左
+  .m_pro_content .left_part{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    position: relative;
+    // justify-content: center;
+    align-content: center;
+    @include responsive(small-screens){
+      padding-left: 20px;
+    };
+    //中轴线
+    &::after{content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             z-index: 1;
+             border-right: 1px dashed #ccc;
+             right: -8px;
+             top: 0;}
+    .row_title{color: $m_proTxtColor}
+    .row_content{color: $m_proContentColor}
+    >div{flex: 1}
+    >div:not(:first-child){
+      font-size: 12px;
+      @include responsive(small-screens){
+        font-size: 16px;
+      };
+    }
+    .lpart_row1{display: flex;
+                align-items: center;
+                padding-right: 0;
+                font-size: 14px;
+                @include responsive(small-screens){
+                  padding-right: 60px;
+                  font-size: 15px;
+                };}
+    .lpart_row2{
+      @include flexCenter(row);
+      justify-content: space-between;
+      .row2_targetAmount{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        span:nth-of-type(2){text-align: left;
+          sub{vertical-align: middle;}}
+      }
+    }
+    .lpart_row3{
+      display: flex;
+      align-items: left;
+      justify-content: space-between;
+      .row3_time{display: flex;flex-direction: column;
+        span:nth-of-type(2){text-align: left;}}
+      .row3_progress{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        span:nth-of-type(1){em{font-style: normal;}}
+        .progress_out{
+          display: block;
+          width: 80px;
+          height: 12px;
+          background-color: $m_probgColor;
+          border-radius: 10px;
+          box-shadow: 0 1px 3px 1px #ccc inset;
+          @include responsive(small-screens){
+            width: 104px;
+          };
+          .progress_inside{
+            display: block;
+            width: 50%;
+            height: 12px;
+            overflow: hidden;
+            &::after{
+              content: '';
+              display: block;
+              width: 200%;
+              height: 12px;
+              border-radius: 10px;
+              background-color: $m_proContentColor;
+              box-shadow: 0px -1px 0 1px $m_proTitColor inset;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  //卡片右
+  .m_pro_content .right_part{
+    // padding-right: 10px;
+    >p{text-align: center;margin: 6px}
+    .rpart_row1{
+      .tag{padding: 0px 3px;border: 1px solid #ccc;
+           font-size: 12px;
+           @include responsive(small-screens){
+             font-size: 16px;
+           };}
+      .tag_index1{color: #399;border-color: #399}
+      .tag_index2{color: #f56854;border-color: #f56854}
+      .tag_index3{color: #bc6d2c;border-color: #bc6d2c}
+    }
+    .rpart_row2{
+      color: $m_allPro_addRate;font-weight: bold;
+      font-size: 14px;
+      @include responsive(small-screens){
+        font-size: 18px;
+      };
+    }
+    .rpart_row3{
+      color: $keyColor;font-weight: bold;
+      em{font-style: normal;font-size: 20px;
+         @include responsive(small-screens){
+           font-size: 30px;
+         };}
+      sub{vertical-align: middle;}
+    }
+    .rpart_row4{color: $m_proTxtColor;font-size: 12px;}
+    .rpart_row5{color: $m_proContentColor;
+                font-size: 14px;
+                @include responsive(small-screens){
+                  font-size: 18px;
+                };}
+  }
+
+
+  //产品星级
+  .row2_star{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    span:nth-of-type(2){
+      position: relative;
+      height: auto;
+      width: calc( 104px / 6 * 5);
+      height: 21px;
+      overflow: hidden;
+      div{position: absolute;
+          left: 0;
+          top: 0;
+          width: 104px;
+          height: 18px;}
+      .gray_star{
+        background: url(../img/star-gray.png) no-repeat;
+        background-image: url(http://ofw4b144k.bkt.clouddn.com/star-gray.png);
+      }
+      .active_star{
+        background: url(../img/star-active.png) no-repeat;
+        background-image: url(http://ofw4b144k.bkt.clouddn.com/star-active.png);
+      }
+    }
+  }
+
+  //新闻内容
+  //新闻icon
+  .news_icon{
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    //default_not_hover
+    >i{width: 40px;height: 40px;
+           @include flexCenter(row);
+           background-color: $m_newsbgColor;
+           border-radius: 50%;
+           color: darken($defaultWhiteColor,5%);
+           margin-bottom: 0;
+           &::before{font-size: 20px;}
+           &:hover{
+             color: $defaultWhiteColor;
+             background-color: $keyColor;
+             cursor: pointer;
+           }}
+     .active_news_icon{
+       color: $defaultWhiteColor;
+       background-color: $keyColor;
+     }
+     &::after{display: none;}
+     @include responsive(medium-screens){
+       >i{width: 60px;height: 60px;
+          margin-bottom: 40px;
+          &::before{font-size: 30px;}}
+     };
+     @include responsive(wide-screens){
+       flex-direction: column;
+       &::after{
+         content: '';
+         display: block;
+         position: absolute;
+         height: 320px;
+         border-right: 1.5px dashed #666;
+         left: 50%;
+         z-index: -1;
+         transform: translateX(50%);
+       }
+     };
+  }
+
+
+
+  /**
+   * FOOTER
+   */
+  footer{background-color: #222;
+    width: 100vw;
+    overflow: hidden;
+    display: none;
+    @include responsive(medium-screens){
+      display: block;
+    };
+    >section{
+      width: 100%;
+      @include responsive(huge-screens){
+        width: 1080px;margin: 0 auto;
+      }
+    }
+    .ft-aboutCompany{
+      margin-bottom: 20px;
+      padding: 15px 0;width: 100%;background-color: rgba(252, 252, 252,1);
+      >.aboutCompany_warp{
+        display: flex;flex-direction: column;
+        align-items: center;justify-content: space-between;
+        width: 100%;
+        @include responsive(wide-screens){
+          flex-direction: row;
+        };
+        @include responsive(huge-screens){
+          width: 1080px;margin: 0 auto;
+        };
+        >ul{padding: 0;margin: 0;flex: 1;
+            display: flex;flex-direction: row;
+            justify-content: center;margin-right: 0;
+            text-align: center;
+            margin-bottom: 20px;
+            @include responsive(wide-screens){
+              flex: 6;margin-right: 60px;
+              margin-bottom: 0;
+            };
+          >li{flex: 1;color: #666;font-size: 14px;
+              padding: 0 5px;
+              @include responsive(wide-screens){
+                padding: 0;border-right: none;
+
+              };
+              &:not(:last-child){border-right: 1px dashed #ccc;}
+              }
+          }
+        >div{@include flexCenter(row);flex: 1;
+          @include responsive(wide-screens){
+            flex: 2;
+          };
+          i{flex: 1;text-align: center;padding: 0 10px;}
+          .icon-wechat:hover::before{color: rgb(118, 170, 122)}
+          .icon-weibo:hover::before{color: lighten($keyColor,20%)}
+          .icon-tweibo:hover::before{color: lighten(blue,20%)}
+          }
+      }}
+    .ft-trustedWebsite{
+      @include flexCenter(column);
+      >span{font-size: 12px;
+            margin-bottom: 20px;
+            color: $defaultWhiteColor}
+      >ul{@include flexCenter(row);
+          padding: 0;width: 100%;
+          margin-bottom: 40px;
+        >li{flex: 1;}}
+    }
+  }
