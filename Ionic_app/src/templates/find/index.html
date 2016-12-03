@@ -1,0 +1,26 @@
+<ion-view title="健康资讯">
+	<ion-header-bar class="bar-subheader" style="padding: 0">
+		<ul class="subheader_list" id="subheader_list">
+			<li ng-repeat="item in cates"
+					ng-class="{'select':$index==0}"
+	 				ng-click="getCateDate($index,item.catid)">
+					{{item.title}}
+			</li>
+		</ul>
+	</ion-header-bar>
+	<ion-content>
+
+		<div class="list home find">
+				<p class="hot_commend">热门推荐</p>
+				<ion-item ng-repeat="hot_item in hot_list" href="#/tab/findcontent/{{hot_item.aid}}">
+					<img src="http://www.phonegap100.com/data/attachment/{{hot_item.pic}}.thumb.jpg" alt="">
+					<h2>{{hot_item.title}}</h2>
+				</ion-item>
+		</div>
+		<ion-infinite-scroll
+	        on-infinite="loadMore()"
+	        distance="1%"
+	        ng-if="isLoadMore">
+    	</ion-infinite-scroll>
+	</ion-content>
+</ion-view>

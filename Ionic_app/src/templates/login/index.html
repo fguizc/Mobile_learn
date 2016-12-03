@@ -1,0 +1,28 @@
+<ion-view title="登录">
+	<ion-nav-buttons class="left">
+		<button class="button button-clear icon ion-ios-arrow-back"
+						ng-click=$ionicGoBack()>
+		</button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-color-light" ng-click="goSigninPage();$event.stopPropagation()">注册</button>
+	</ion-nav-buttons>
+
+	<ion-content>
+		<div class="list list-inset">
+			<label for="" class="item item-input">
+				手机号：
+				<input type="text" placeholder="手机号">
+			</label>
+			<label class="item item-input">
+				密　码：
+				<input type="text" placeholder="密码">
+			</label>
+			<button class="button button-block button-positive">
+				登录
+			</button>
+		</div>
+
+	</ion-content>
+
+</ion-view>

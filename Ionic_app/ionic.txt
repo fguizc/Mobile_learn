@@ -1,0 +1,42 @@
+兼容ios android tab
+    $ionicConfigProvider.platform.ios.tabs.style('standard');
+    $ionicConfigProvider.platform.ios.tabs.position('bottom');
+    $ionicConfigProvider.platform.android.tabs.style('standard');
+    $ionicConfigProvider.platform.android.tabs.position('standard');
+
+    $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
+    $ionicConfigProvider.platform.android.navBar.alignTitle('left');
+
+    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
+
+    $ionicConfigProvider.platform.ios.views.transition('ios');
+    $ionicConfigProvider.platform.android.views.transition('android');
+
+
+
+如何隐藏和显示tab导航：
+<ion-tabs class="tabs-light tabs-color-positive tabs-icon-top {{hideTab}}"></ion-tabs>
+/*controller加载前执行的事件*/
+    $scope.$on('$ionicView.beforeEnter', function() {
+        $rootScope.hideTab='tabs-item-hide';   /*隐藏底部tab切换*/
+        console.log('newscontentCtrl-beforeEnter');
+    });
+
+    /*加载完成执行的方法*/
+    $scope.$on('$ionicView.afterEnter', function() {
+        console.log('newscontentCtrl-afterEnter');
+    }, false);
+
+    /*页面销毁的时候执行的事件  tab切换的时候不会销毁    新闻详情返回新闻列表的时候才会销毁*/
+    $scope.$on('$destroy',function(){
+        console.log('newscontentCtrl-$destroy');
+        $rootScope.hideTab='';  /*显示底部tab切换*/
+    })
+
+自动添加导航按钮？
+<ion-nav-buttons side="left">
+	 <button ng-click="$ionicGoBack()" class="button icon ion-ios-arrow-back button-clear">
+		返回
+	 </button>
+</ion-nav-buttons>

@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+body{
+	font-family: '微软雅黑'
+}
+
+
+.item.item-borderless-top{
+	border-top-width:0;
+}
+
+.user>.list{margin-bottom:0;text-align: center;
+	.item-avatar{padding: 16px;
+		img{position: relative;
+			top: 0;
+			left: 0;
+			max-width:72px;
+			max-height:72px;}}
+	.item+.item{padding-top: 0}}
+
+.item-input+.item-input{
+	margin-top: 10px;
+}
+
+/*热门推荐*/
+.hot_commend{
+	padding-left: 4px;
+	margin-left: 18px;
+	&:after{
+		content:'';
+		// display: block;
+		height: 16px;
+		position: absolute;
+		left:18px;
+		border-left-width: 2px;
+		border-left-color: rgba(246, 3, 7, 1);
+		border-left-style: solid;
+	}
+}
+
+//热门推荐列表中的img和标题排版样式
+.list.home.find{
+	 .item-content,.item{
+		display: flex;
+		flex-direction: row;
+		min-width: 100%;
+		img{
+			max-width: 140px;
+			min-width: 140px;
+			height: 140px;}
+		// h2{white-space: wrap;}
+		h2{font-weight: 700;
+		   font-color: #333;
+		   font-family: '微软雅黑';
+			padding-left: 10px;}
+	 }
+}
+
+
+.slidebox{
+	.box{
+		width: 100%;
+		height: 160px;
+		color:white;
+		text-align: center;
+		// line-height: 100px;
+		h1{color:white;line-height: 100px;}
+		&.blue{background-color: rgba(56, 126, 245, 1)}
+		&.royal{background-color: rgba(138, 109, 233, 1)}
+		&.pink{background-color: pink}
+	}
+}
+
+
+.content{
+	p{
+		a{display: inline-block;width: 100%;
+		  text-align: center}
+		img{ max-width: 90vw}
+	}
+	// div>div{text-indent: -1em}
+	div>font,div>a,div>b>a{display: block;margin: 0 auto;text-align: center}
+}
+
+
+//新闻分类被选择时的样式
+.subheader_list{
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	li{height: 44px;
+	   flex:1;
+	   text-align: center;
+	   line-height: 44px;
+	   box-sizing: border-box;
+	   &:hover{cursor: pointer;}
+	   &.select{
+			 border-bottom: 2px solid rgba(245, 56, 56, 1);
+		 }
+	 }
+}
+
+
+//首页卡片小图标的绝对定位
+.home-card{
+	position: relative;
+	h2{font-size: 24px;}
+	p{color: #333}
+	i{position: absolute;
+		font-size: 30px;
+		right: 10px;top: 50%;
+		transform: translate3d(0,-50%,0);
+	}
+}
+
+
+.s_26{
+	font-size: 26px;}
+.s_22{
+	font-size: 22px;}
+.s_18{
+	font-size: 18px;}
+.s_14{
+	font-size: 14px;}

@@ -1,0 +1,121 @@
+@charset "UTF-8";
+body {
+  font-family: "微软雅黑"; }
+
+.item.item-borderless-top {
+  border-top-width: 0; }
+
+.user > .list {
+  margin-bottom: 0;
+  text-align: center; }
+  .user > .list .item-avatar {
+    padding: 16px; }
+    .user > .list .item-avatar img {
+      position: relative;
+      top: 0;
+      left: 0;
+      max-width: 72px;
+      max-height: 72px; }
+  .user > .list .item + .item {
+    padding-top: 0; }
+
+.item-input + .item-input {
+  margin-top: 10px; }
+
+/*热门推荐*/
+.hot_commend {
+  padding-left: 4px;
+  margin-left: 18px; }
+  .hot_commend:after {
+    content: '';
+    height: 16px;
+    position: absolute;
+    left: 18px;
+    border-left-width: 2px;
+    border-left-color: #f60307;
+    border-left-style: solid; }
+
+.list.home.find .item-content, .list.home.find .item {
+  display: flex;
+  flex-direction: row;
+  min-width: 100%; }
+  .list.home.find .item-content img, .list.home.find .item img {
+    max-width: 140px;
+    min-width: 140px;
+    height: 140px; }
+  .list.home.find .item-content h2, .list.home.find .item h2 {
+    font-weight: 700;
+    font-color: #333;
+    font-family: '微软雅黑';
+    padding-left: 10px; }
+
+.slidebox .box {
+  width: 100%;
+  height: 160px;
+  color: white;
+  text-align: center; }
+  .slidebox .box h1 {
+    color: white;
+    line-height: 100px; }
+  .slidebox .box.blue {
+    background-color: #387ef5; }
+  .slidebox .box.royal {
+    background-color: #8a6de9; }
+  .slidebox .box.pink {
+    background-color: pink; }
+
+.content p a {
+  display: inline-block;
+  width: 100%;
+  text-align: center; }
+.content p img {
+  max-width: 90vw; }
+.content div > font, .content div > a, .content div > b > a {
+  display: block;
+  margin: 0 auto;
+  text-align: center; }
+
+.subheader_list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .subheader_list li {
+    height: 44px;
+    flex: 1;
+    text-align: center;
+    line-height: 44px;
+    box-sizing: border-box; }
+    .subheader_list li:hover {
+      cursor: pointer; }
+    .subheader_list li.select {
+      border-bottom: 2px solid #f53838; }
+
+.home-card {
+  position: relative; }
+  .home-card h2 {
+    font-size: 24px; }
+  .home-card p {
+    color: #333; }
+  .home-card i {
+    position: absolute;
+    font-size: 30px;
+    right: 10px;
+    top: 50%;
+    transform: translate3d(0, -50%, 0); }
+
+.s_26 {
+  font-size: 26px; }
+
+.s_22 {
+  font-size: 22px; }
+
+.s_18 {
+  font-size: 18px; }
+
+.s_14 {
+  font-size: 14px; }
+
+/*# sourceMappingURL=index.css.map */

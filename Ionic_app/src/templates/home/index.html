@@ -1,0 +1,45 @@
+<ion-view view-title="首页" align-title="center">
+
+	<ion-content>
+		<ion-slide-box class="slidebox">
+			<ion-slide>
+				<div class="box blue"><h1>BLUE</h1></div>
+			</ion-slide>
+			<ion-slide>
+				<div class="box royal"><h1>ROYAL</h1></div>
+			</ion-slide>
+			<ion-slide>
+				<div class="box pink"><h1>PINK</h1></div>
+			</ion-slide>
+		</ion-slide-box>
+		<div class="row list">
+			<div class="col home-card item item-positive" style="margin: 10px 5px 10px 10px;border-radius: 5px;position: relative;">
+				<h2>拍照分析</h2>
+				<p>照一照分析您的身体健康</p>
+				<i class="icon ion-ios-pulse-strong"></i>
+			</div>
+			<div class="col home-card item item-royal" style="margin: 10px 5px 10px 10px;border-radius: 5px;position: relative;">
+				<h2>健康资讯</h2>
+				<p>为您的健康一路护航</p>
+				<i class="icon ion-ios-navigate-outline"
+				   style="position: absolute;right: 10px;top: 50%;transform: translate3d(0,-50%,0);"></i>
+			</div>
+		</div>
+		<div class="list home find">
+				<p class="hot_commend">热门推荐</p>
+				<div class="item" ng-repeat="hot_item in hot_list">
+					<img src="http://www.phonegap100.com/data/attachment/{{hot_item.pic}}.thumb.jpg" alt="">
+					<!-- <img src="{{hot_item.pic}} alt=""> -->
+					<h2>{{hot_item.title}}</h2>
+				</div>
+
+		</div>
+		<ion-infinite-scroll
+    			  on-infinite="loadMore()"
+    			  distance="1%"
+    			  ng-if="isLoadMore">
+
+    	</ion-infinite-scroll>
+	</ion-content>
+
+</ion-view>

@@ -1,0 +1,42 @@
+<ion-view title="用户注册">
+	<ion-nav-buttons class="left">
+		<button class="button button-clear icon ion-ios-arrow-back"
+						ng-click=$ionicGoBack()
+						ng-if="isFirst">
+								返回
+		</button>
+
+	</ion-nav-buttons>
+	<ion-content>
+		<div class="list inset padding">
+			<!-- <ion-item class=""></ion> -->
+			<label class="item item-input">
+				<input type="text" placeholder="请输入您的注册用户名" 
+					   ng-model="count.name" 
+					   ng-keyup="verifyName()">
+			</label>
+			<div>{{warning.name}}</div>
+			<label class="item item-input">
+				<input type="password" placeholder="请输入您的密码" 
+					   ng-model="count.psw" 
+					   ng-keyup="verifyPass()">
+			</label>
+			<div>{{warning.pass}}</div>
+			<label class="item item-input">
+				<input type="password" placeholder="请再次确认输入密码" 
+					   ng-model="count.repsw"
+					   ng-keyup="verifyRePass()">
+			</label>
+			<div>{{warning.repass}}</div>
+			<a class="button button-block button-positive padding-horizontal" style="background-clip: content-box;border: none" ng-click="sucessRegister()">注册</a>
+		</div>
+		<pre>
+			当前输入的
+				手机号:{{count.name}}
+				密码:{{count.psw}}
+				二次:{{count.repsw}}
+		</pre>
+
+	</ion-content>
+
+</ion-view>

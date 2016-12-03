@@ -1,0 +1,23 @@
+<ion-view view-title="" >
+	<ion-nav-title align-title="center">
+		{{item.title}}
+	</ion-nav-title>
+	<ion-content style="padding: 2vw;">
+		<ion-spinner ng-if="isShowLoading" icon="ios" style="width:40px;height:40px;display:block;margin:100px auto"></ion-spinner>
+
+		<h2 ng-if="!isShowLoading">{{item.title}}</h2>
+		<p ng-if="!isShowLoading" ng-bind-html="item.content" class="content"></p>
+	</ion-content>
+
+	<ion-footer-bar class="bar-positive">
+		<button class="button button-left button-clear padding-left" ng-click=setFontSize()>
+			<em style="font-weight: bolder;font-size: 24px">A</em>字号
+		</button>
+		<button class="button button-right button-clear padding-right" ng-click="storage()">
+			<i class="icon"
+				 ng-class="{'ion-ios-star-outline':isChangeColor,'ion-ios-star':!isChangeColor,'energized':!isChangeColor}">
+			</i>
+			收藏
+		</button>
+	</ion-footer-bar>
+</ion-view>

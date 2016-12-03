@@ -1,0 +1,44 @@
+<ion-view view-title="我">
+	
+	<ion-content>
+		<ion-list class="user">
+			<ion-item class="item-avatar item-borderless">
+				<img src="img/avatar.png" alt="">
+			</ion-item>
+			<!-- div.item.item-button -->
+			<ion-item class="item-borderless-top">
+				<div class="button button-clear button-dark" ng-click="goLoginPage()">立即登录</div>
+				<div class="button button-clear button-dark" ng-click="goSigninPage()">立即注册</div>
+			</ion-item>
+
+		</ion-list>
+
+		<ion-list>
+			<ion-item class="item-divider"></ion-item>
+			<ion-item class="item-icon-left" href="#/tab/userhealth">
+				<i class="icon ion-ios-pulse-strong positive"></i>
+				我的健康
+			</ion-item>
+			<ion-item class="item-icon-left" href="#/tab/usercollection">
+				<i class="icon ion-ios-star balanced"></i>
+				我的收藏
+			</ion-item>
+			<ion-item class="item-divider"></ion-item>
+			<ion-item class="item-icon-left" href="#/tab/useronline">
+				<i class="icon ion-ios-chatbubble energized"></i>
+				在线客服
+			</ion-item>
+			<ion-item class="item-icon-left" href="#/tab/userhelp">
+				<i class="icon ion-ios-help positive"></i>
+				帮助手册
+			</ion-item>
+			<ion-item class="item-divider"></ion-item>
+			<ion-item class="item-icon-left" href="#/tab/userfeedback">
+				<i class="icon ion-ios-email dark"></i>
+				意见反馈
+			</ion-item>
+		</ion-list>
+
+	</ion-content>
+
+</ion-view>
