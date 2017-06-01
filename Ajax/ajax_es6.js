@@ -6,10 +6,7 @@ const newRequest = ()=>{
 	}
 	return new ActiveXObject('Microsoft.XMLHTTP')
 }
-// data is object, i is key data[i] is value
-// data = {
-//	 i:data[i]
-// }
+
 const parseDatas = (data)=>{
 	let arr = []
 	for(let i in data){
@@ -19,9 +16,13 @@ const parseDatas = (data)=>{
 	return arr.join('&') //output ket1=value1&key2=value2 etc
 }
 
+const callBack = (xhr, obj)=>{
+	xhr.status == 200 ? obj.success(xhr.responseText) : obj.failure(xhr.status)
+}
+
 const ajaxPacking = (obj)=>{
 	let flag = 0,
-		xhr  = newRequest()
+	xhr  = newRequest()
 	obj.data = parseDatas(obj.data)
 
 // if method == get
@@ -37,33 +38,11 @@ const ajaxPacking = (obj)=>{
 		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
 		xhr.send(obj.data)
 	}
-
 	if(obj.async){
-		xhr.onreadystatechange = ()=>{
-			xhr.readState == 4 ? callBack() : ''
+		xhr.onreadystatechange = function() {
+			xhr.readyState == 4 ? callBack(xhr, obj) : ''
 		}
 	}else{
-		callBack()
+		callBack(xhr, obj)
 	}
 }
-
-const callBack = ()=>{
-	xhr.status == 200 ? obj.success(xhr.responseText) : obj.failure(xhr.status)
-}
-
-
-ajaxPacking({
-	method:'get',
-	url:'http://localhost:8080/ajax/path',
-	data:{
-		name:'tom',
-		age:12,
-	},
-	async:true,
-	success:(responseText)=>{
-		console.log('request is responsed '+ responseText)
-	},
-	failure:(errorCode)=>{
-		console.log('request is error '+ errorCode)
-	}
-})
