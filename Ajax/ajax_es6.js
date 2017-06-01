@@ -9,15 +9,22 @@ const newRequest = ()=>{
 
 const parseDatas = (data)=>{
 	let arr = []
-	for(let i in data){
-		let str = i + '=' + data[i]
+	Object.keys(data).map((item, index)=>{
+		const str = `${item}=${data[item]}`
 		arr.push(str)
-	}
+	})
+
 	return arr.join('&') //output ket1=value1&key2=value2 etc
 }
 
 const callBack = (xhr, obj)=>{
-	xhr.status == 200 ? obj.success(xhr.responseText) : obj.failure(xhr.status)
+
+	const {
+		success,
+		failure
+	} = obj
+	
+	xhr.status == 200 ? success(xhr.responseText) : failure(xhr.status)
 }
 
 const ajaxPacking = (obj)=>{
